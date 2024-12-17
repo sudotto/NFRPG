@@ -1,3 +1,6 @@
+#ifndef REND_H
+#define REND_H
+
 #define BLACK   "\e[0;30m"
 #define RED     "\e[0;31m"
 #define GREEN   "\e[0;32m"
@@ -12,11 +15,13 @@
 typedef struct {
 	int w;
 	int h;
-	char chars[100][100];
+	char* syms[100][100];
 	char* colors[100][100];
 } renderer;
 
 renderer new_renderer();
-renderer draw_renderer(renderer rend, char c, char* color, int x, int y);
-renderer fill_renderer(renderer rend, char c, char* color);
+renderer draw_renderer(renderer rend, char* sym, char* color, int x, int y);
+renderer fill_renderer(renderer rend, char* sym, char* color);
 void render_renderer(renderer rend);
+
+#endif

@@ -7,7 +7,8 @@
 #include <termios.h>
 #include <time.h>
 
-#include "rend.h"
+#include "include/rend.h"
+#include "include/player.h"
 
 // MAIN
 
@@ -19,32 +20,22 @@ int main(int argc, char** argv){
 	tcsetattr(STDIN_FILENO, TCSANOW, &term);
 	renderer rend = new_renderer();
 	bool running = true;
+	player pl = new_player();
 	char key;
-	int x = 0;
-	int y = 0;
 	while(running){
 		printf("\033[H");
-		rend = fill_renderer(rend, ' ', WHITE);
-		rend = draw_renderer(rend, 'x', RED, x, y);
-		render_renderer(rend);
+		rend = fill_renderer(rend, " ", WHITE);
 		key = getchar();
 		switch(key){
 			case 'q':
 				running = false;
 				break;
-			case 'w':
-				y -= 1;
-				break;
-			case 'a':
-				x -= 1;
-				break;
-			case 's':
-				y += 1;
-				break;
-			case 'd':
-				x += 1;
-				break;
 		}
+
+		pl = control_player(pl, key);
+		rend = render_player(rend, pl);
+
+		render_renderer(rend);
 	}
 	term.c_lflag |= (ICANON | ECHO);
 	tcsetattr(STDIN_FILENO, TCSANOW, &term);

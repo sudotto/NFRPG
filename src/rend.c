@@ -4,7 +4,7 @@
 #include <sys/ioctl.h>
 #include <unistd.h>
 
-#include "rend.h"
+#include "include/rend.h"
 
 // RENDERER
 
@@ -23,20 +23,20 @@ renderer new_renderer(){
 	return rend;
 }
 
-renderer draw_renderer(renderer rend, char c, char* color, int x, int y){
+renderer draw_renderer(renderer rend, char* sym, char* color, int x, int y){
 	if(y >= 0 && y <= rend.h){
 		if(x >= 0 && x <= rend.w){
-			rend.chars[y][x] = c;
+			rend.syms[y][x] = sym;
 			rend.colors[y][x] = color;
 		}
 	}
 	return rend;
 }
 
-renderer fill_renderer(renderer rend, char c, char* color){
+renderer fill_renderer(renderer rend, char* sym, char* color){
 	for(int y = 0; y <= rend.h; y++){
 		for(int x = 0; x <= rend.w; x++){
-			rend = draw_renderer(rend, c, color, x, y);
+			rend = draw_renderer(rend, sym, color, x, y);
 		}
 	}
 	return rend;
@@ -45,8 +45,7 @@ renderer fill_renderer(renderer rend, char c, char* color){
 void render_renderer(renderer rend){
 	for(int y = 0; y <= rend.h; y++){
 		for(int x = 0; x <= rend.w; x++){
-			printf("%s", rend.colors[y][x]);
-			printf("%c", rend.chars[y][x]);
+			printf("%s%s", rend.colors[y][x], rend.syms[y][x]);
 		}
 		printf("\n");
 	}

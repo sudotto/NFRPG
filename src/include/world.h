@@ -1,18 +1,17 @@
-#ifndef WORLD_H
-#define WORLD_H
+#ifndef LEVEL_H
+#define LEVEL_H
 
 #include "player.h"
 //#include "npc.h"
 #include "block.h"
 
-// WORLD STRUCTURE
-
-////////////////////////// WORK ON THIS!
+// LEVEL STRUCTURE
 
 typedef struct {
-	player pl;
-} world;
+	block blocks[10000];
+} level;
 
-world new_world();
+level new_level();
+level push_block(level lv, block bl);
 
 #endif

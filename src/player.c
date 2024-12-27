@@ -5,9 +5,9 @@
 
 player new_player(){
 	player pl;
-	pl.x = 1;
-	pl.y = 1;
-	pl.x_spd = 2;
+	pl.x = 0;
+	pl.y = 0;
+	pl.x_spd = 1;
 	pl.y_spd = 1;
 	char* name = "Player";
 	return pl;

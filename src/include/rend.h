@@ -15,8 +15,8 @@
 typedef struct {
 	int w;
 	int h;
-	char* syms[100][100];
-	char* colors[100][100];
+	char* syms[101][101];
+	char* colors[101][101];
 } renderer;
 
 renderer new_renderer();

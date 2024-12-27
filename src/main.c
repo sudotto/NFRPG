@@ -25,17 +25,17 @@ int main(int argc, char** argv){
 	while(running){
 		printf("\033[H");
 		rend = fill_renderer(rend, " ", WHITE);
+
+		pl = control_player(pl, key);
+		rend = render_player(rend, pl);
+
+		render_renderer(rend);
 		key = getchar();
 		switch(key){
 			case 'q':
 				running = false;
 				break;
 		}
-
-		pl = control_player(pl, key);
-		rend = render_player(rend, pl);
-
-		render_renderer(rend);
 	}
 	term.c_lflag |= (ICANON | ECHO);
 	tcsetattr(STDIN_FILENO, TCSANOW, &term);
